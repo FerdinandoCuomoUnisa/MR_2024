@@ -1,4 +1,5 @@
 from constants import Directions, Signs
+from waypoint import Waypoint
 
 class Junctions(): 
 
@@ -22,70 +23,70 @@ class Junctions():
         '''Inizializza i punti in base ai punti cardinali della mappa'''
 
         # Punto A
-        self.a.set_nord = self.c  # cioè a nord del punto a c'è il punto c
-        self.a.set_est = self.b   # ad est del punto a c'è il punto b
-        self.a.set_sud = None     # a sud del punto a non c'è niente (un muro ad esmepio)
-        self.a.set_ovest = None
+        self.a.set_nord(self.c)  # cioè a nord del punto a c'è il punto c
+        self.a.set_est(self.b)   # ad est del punto a c'è il punto b
+        self.a.set_sud(None)     # a sud del punto a non c'è niente (un muro ad esmepio)
+        self.a.set_ovest(None)
 
         # Punto B 
-        self.b.set_nord = self.d
-        self.b.set_est = None
-        self.b.set_sud = None
-        self.b.set_ovest = self.a
+        self.b.set_nord(self.d)
+        self.b.set_est(None)
+        self.b.set_sud(None)
+        self.b.set_ovest(self.a)
 
         # Punto C
-        self.c.set_nord = self.e
-        self.c.set_est = self.d
-        self.c.set_sud = self.a
-        self.c.set_ovest = None
+        self.c.set_nord(self.e)
+        self.c.set_est(self.d)
+        self.c.set_sud(self.a)
+        self.c.set_ovest(None)
 
         # Punto D
-        self.d.set_nord = self.f
-        self.d.set_est = None
-        self.d.set_sud = self.b
-        self.d.set_ovest = self.c
+        self.d.set_nord(self.f)
+        self.d.set_est(None)
+        self.d.set_sud(self.b)
+        self.d.set_ovest(self.c)
 
         # Punto E
-        self.e.set_nord = self.g
-        self.e.set_est = self.f
-        self.e.set_sud = self.c
-        self.e.set_ovest = None
+        self.e.set_nord(self.g)
+        self.e.set_est(self.f)
+        self.e.set_sud(self.c)
+        self.e.set_ovest(None)
 
         # Punto F
-        self.f.set_nord = self.h
-        self.f.set_est = None
-        self.f.set_sud = self.d
-        self.f.set_ovest = self.e
+        self.f.set_nord(self.h)
+        self.f.set_est(None)
+        self.f.set_sud(self.d)
+        self.f.set_ovest(self.e)
 
         # Punto G
-        self.g.set_nord = self.i
-        self.g.set_est = self.h
-        self.g.set_sud = self.e
-        self.g.set_ovest = None
+        self.g.set_nord(self.i)
+        self.g.set_est(self.h)
+        self.g.set_sud(self.e)
+        self.g.set_ovest(None)
 
         # Punto H
-        self.h.set_nord = self.l
-        self.h.set_est = None
-        self.h.set_sud = self.f
-        self.h.set_ovest = self.g
+        self.h.set_nord(self.l)
+        self.h.set_est(None)
+        self.h.set_sud(self.f)
+        self.h.set_ovest(self.g)
 
         # Punto F
-        self.f.set_nord = self.h
-        self.f.set_est = None
-        self.f.set_sud = self.d
-        self.f.set_ovest = self.e
+        self.f.set_nord(self.h)
+        self.f.set_est(None)
+        self.f.set_sud(self.d)
+        self.f.set_ovest(self.e)
 
         # Punto I
-        self.i.set_nord = None
-        self.i.set_est = self.l
-        self.i.set_sud = self.g
-        self.i.set_ovest = None
+        self.i.set_nord(None)
+        self.i.set_est(self.l)
+        self.i.set_sud(self.g)
+        self.i.set_ovest(None)
 
         # Punto L
-        self.l.set_nord = None
-        self.l.set_est = None
-        self.l.set_sud = self.h
-        self.l.set_ovest = self.i
+        self.l.set_nord(None)
+        self.l.set_est(None)
+        self.l.set_sud(self.h)
+        self.l.set_ovest(self.i)
 
 
     def _get_next_direction(self, current_direction, sign):
@@ -137,8 +138,10 @@ class Junctions():
         return next_direction
     
 
-    def get_next_junciton_point(self, current_point, current_direction, sign):
+    
+    def get_next_junciton_waypoint(self, current_point, current_direction, sign):
         next_direction = self._get_next_direction(current_direction, sign)
+        
         next_point = '' 
         if next_direction == Directions.NORD: 
             next_point = current_point.get_nord()
@@ -149,7 +152,9 @@ class Junctions():
         elif next_direction == Directions.OVEST: 
             next_point = current_point.get_ovest()
 
-        return next_point
+        waypoint = Waypoint(next_point.get_x(), next_point.get_y(), next_direction)
+
+        return waypoint
         
      
 

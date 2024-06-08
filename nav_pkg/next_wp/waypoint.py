@@ -1,6 +1,6 @@
 from constants import Directions
 
-class waypoint(): 
+class Waypoint(): 
     
     def __init__(self, x, y, direction):
         self._x = x 
