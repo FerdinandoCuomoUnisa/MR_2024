@@ -2,10 +2,11 @@
 
 class JunctionPoint(): 
 
-    def __init__(self, x, y): 
+    def __init__(self, coordinates): 
+        '''coordinates: è una lista di coordinate in cui il primo elemento è la x e il secondo è la y'''
         # Centro dell'incroio
-        self._x = x
-        self._y = y
+        self._x = coordinates[0]
+        self._y = coordinates[1]
         
         # Punti a nord, sud, est e ovest del punto 
         self._nord = None 

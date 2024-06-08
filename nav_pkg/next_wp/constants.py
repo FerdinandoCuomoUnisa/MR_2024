@@ -13,7 +13,7 @@ class Signs(enum):
     STRAIGHTON = 'STRAIGHTON'
     GOBACK = 'GOBACK'
 
-class Coordinates(enum): 
+class JunctionCoordinates(enum): 
     A = [-22.9, 0.044]
     B = [-23.74, -8.72]
     C = [-3.11, 0.11]

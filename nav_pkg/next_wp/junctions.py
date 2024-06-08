@@ -1,26 +1,25 @@
-from constants import Directions, Signs
+from constants import Directions, Signs, JunctionCoordinates
 from waypoint import Waypoint
 
 class Junctions(): 
 
 
-    def __init__(self, a, b, c, d, e, f, g, h, i, l): 
-        self.a = a
-        self.b = b 
-        self.c = c 
-        self.d = d 
-        self.e = e 
-        self.f = f 
-        self.g = g 
-        self.h = h 
-        self.i = i 
-        self.l = l 
-        self.initialize_points()
-
+    def __init__(self): 
+        self.a = JunctionCoordinates.A
+        self.b = JunctionCoordinates.B
+        self.c = JunctionCoordinates.C
+        self.d = JunctionCoordinates.D
+        self.e = JunctionCoordinates.E
+        self.f = JunctionCoordinates.F
+        self.g = JunctionCoordinates.G
+        self.h = JunctionCoordinates.H
+        self.i = JunctionCoordinates.I
+        self.l = JunctionCoordinates.L
+        self.initialize_graph()  # aggiunge ai singoli incroci informazioni sugli incroci limitrofi 
 
         
-    def initialize_points(self): 
-        '''Inizializza i punti in base ai punti cardinali della mappa'''
+    def initialize_graph(self): 
+        '''Per ogni incocio, specifica quale incrocio è a nord, quale è a sud, quale è a est e quale è a nord'''
 
         # Punto A
         self.a.set_nord(self.c)  # cioè a nord del punto a c'è il punto c
@@ -140,8 +139,11 @@ class Junctions():
 
     
     def get_next_junciton_waypoint(self, current_point, current_direction, sign):
+        '''Restituisce il prossimo waypoint in cui andare in base al segnale ricevuto 
+        e alla posa (coordinate + direzione) corrente'''
+
         next_direction = self._get_next_direction(current_direction, sign)
-        
+
         next_point = '' 
         if next_direction == Directions.NORD: 
             next_point = current_point.get_nord()
